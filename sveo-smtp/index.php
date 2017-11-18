@@ -41,8 +41,9 @@ add_action('phpmailer_init', function($phpmailer) {
 
 		$phpmailer->Mailer = 'smtp';
 
-		if (defined('SVEO_SMTP_REPLY_TO_MAIL'))
-            $phpmailer->AddReplyTo(SVEO_SMTP_REPLY_TO_MAIL, SVEO_SMTP_REPLY_TO_NAME);
+		if (defined('SVEO_SMTP_REPLY_TO_MAIL')) {
+			$phpmailer->AddReplyTo(SVEO_SMTP_REPLY_TO_MAIL, SVEO_SMTP_REPLY_TO_NAME);
+		}
 
 		$phpmailer->SMTPSecure = SVEO_SMTP_ENCRYPTION;
 		$phpmailer->Host = SVEO_SMTP_HOST;
@@ -70,20 +71,24 @@ add_action('phpmailer_init', function($phpmailer) {
  */
 add_filter('wp_mail_from', function($default) {
 
-	if(defined('SVEO_SMTP_FROM_MAIL')) 
+	// When it's used via CLI we don't have SERVER_NAME, so use host name instead
+	$site_domain = ! empty($_SERVER['SERVER_NAME'])? $_SERVER['SERVER_NAME'] : wp_parse_url(get_home_url(get_current_blog_id()), PHP_URL_HOST);
+
+	// Get the site domain and get rid of www.
+	if(substr($site_domain, 0, 4) == 'www.') {
+		$site_domain = substr($site_domain, 4);
+	}
+
+	// If the from email is not the default, return it unchanged.
+	if($default != "wordpress@$site_domain") {
+		return $default;
+	}
+
+	if(defined('SVEO_SMTP_FROM_MAIL')) {
+
 		$from_email = SVEO_SMTP_FROM_MAIL;
 
-	else {
-		// When it's used via CLI we don't have SERVER_NAME, so use host name instead
-		$site_domain = ! empty($_SERVER['SERVER_NAME'])? $_SERVER['SERVER_NAME'] : wp_parse_url(get_home_url(get_current_blog_id()), PHP_URL_HOST);
-
-		// Get the site domain and get rid of www.
-		if(substr($site_domain, 0, 4) == 'www.')
-			$site_domain = substr($site_domain, 4);
-
-		// If the from email is not the default, return it unchanged.
-		if($default != "wordpress@$site_domain")
-			return $default;
+	} else {
 
 		// Check if admin email it's of domain name
 		$admin_mail = get_bloginfo('admin_email');
@@ -107,8 +112,9 @@ add_filter('wp_mail_from', function($default) {
 add_filter('wp_mail_from_name', function($default) {
 
 	// Replace only when is default value
-	if (strtolower($default) == 'wordpress' && defined('SVEO_SMTP_FROM_NAME'))
+	if (strtolower($default) == 'wordpress' && defined('SVEO_SMTP_FROM_NAME')) {
 		return SVEO_SMTP_FROM_NAME;
+	}
 
 	return $default;
 });
