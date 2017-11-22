@@ -35,7 +35,7 @@ This plugin helps you use proper authentication which increases email deliverabi
 
 = Why use this SMTP plugin? =
 
-There are many WP plugins for SMTP, but this one aim to be simple, without storing anything on database, but doing configuration only via config.php. Also there is not complete override of wp_mail() function like other plugins, but it's used only hook for add additional functionality.
+There are many WP plugins for SMTP, but this one aim to be simple, without storing anything on database, but doing configuration only via wp-config.php. Also there is not complete override of wp_mail() function like other plugins, but it's used only hook for add additional functionality.
 
 = Credits =
 
