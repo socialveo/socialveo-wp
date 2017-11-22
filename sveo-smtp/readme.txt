@@ -33,6 +33,10 @@ Email sent by WordPress use PHP mail() function, and often the email go in the s
 SMTP (Simple Mail Transfer Protocol) is the industry standard for sending emails. 
 This plugin helps you use proper authentication which increases email deliverability.
 
+= Why use this SMTP plugin? =
+
+There are many WP plugins for SMTP, but this one aim to be simple, without storing anything on database, but doing configuration only via config.php. Also there is not complete override of wp_mail() function like other plugins, but it's used only hook for add additional functionality.
+
 = Credits =
 
 It is maintained by the team behind <a href="https://socialveo.com/" rel="friend">Socialveo</a>.
