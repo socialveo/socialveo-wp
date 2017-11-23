@@ -1,5 +1,5 @@
 === Socialveo SMTP ===
-Contributors: Socialveo Sagl
+Contributors: socialveo
 Website: https://socialveo.com/
 Tags: smtp, wp_mail, mailer, phpmailer, socialveo
 Requires at least: 2.7
@@ -35,7 +35,7 @@ This plugin helps you use proper authentication which increases email deliverabi
 
 = Why use this SMTP plugin? =
 
-There are many WP plugins for SMTP, but this one aim to be simple, without storing anything on database, but doing configuration only via wp-config.php. Also there is not complete override of wp_mail() function like other plugins, but it's used only hook for add additional functionality.
+There are many WP plugins for SMTP, but this one aim to be simple by using lightweight code (single file less than 4KB), without storing anything on database, but doing configuration only via wp-config.php. Also there is not complete override of wp_mail() function like other plugins, but it's used only hook for add additional functionality; this allow easy upgrade to future version of WP.
 
 = Credits =
 
@@ -54,7 +54,8 @@ Add HTML email templates to all wordpress emails.
 define('SVEO_SMTP_ENABLE', true); // Enable/disable SMTP
 define('SVEO_SMTP_FROM_MAIL', 'noreply@my-domain.com'); // Set From email
 define('SVEO_SMTP_FROM_NAME', 'My Sitename'); // Set From name
-define('SVEO_SMTP_REPLY_TO', 'reply@my-domain.com'); // Optionally set different reply to
+define('SVEO_SMTP_REPLY_TO_MAIL', 'reply@my-domain.com'); // Optionally set different reply to
+define('SVEO_SMTP_REPLY_TO_NAME', 'My Sitename'); // Optionally set different reply to
 define('SVEO_SMTP_HOST', 'localhost'); // The SMTP mail host
 define('SVEO_SMTP_PORT', 25); // The SMTP server port number, defaults to 465 if encryption is ssl and 25 otherwise
 define('SVEO_SMTP_ENCRYPTION', ''); // 'ssl', 'tls' or ''
